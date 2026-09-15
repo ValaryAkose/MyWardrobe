@@ -30,37 +30,31 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
-Future<void> _createAccount() async {
-  if (!_formKey.currentState!.validate()) {
-    return;
-  }
+  Future<void> _createAccount() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
 
-  final authProvider = context.read<AuthProvider>();
+    final authProvider = context.read<AuthProvider>();
 
-  final success = await authProvider.signup(
-    name: _nameController.text,
-    email: _emailController.text,
-    password: _passwordController.text,
-  );
-
-  if (!mounted) return;
-
-  if (success) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Account created successfully!'),
-      ),
+    final success = await authProvider.signup(
+      name: _nameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
     );
 
-    // Onboarding will go here next.
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('An account with this email already exists.'),
-      ),
-    );
+    if (!mounted) return;
+
+    if (success) {
+      Navigator.pushReplacementNamed(context, AppRoutes.stylePreferences);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('An account with this email already exists.'),
+        ),
+      );
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -156,8 +150,7 @@ Future<void> _createAccount() async {
                       return 'Please enter your email';
                     }
 
-                    final emailRegex =
-                        RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+                    final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 
                     if (!emailRegex.hasMatch(value.trim())) {
                       return 'Please enter a valid email';
@@ -243,9 +236,7 @@ Future<void> _createAccount() async {
                 Row(
                   children: [
                     const Expanded(
-                      child: Divider(
-                        color: MyWardrobeColors.border,
-                      ),
+                      child: Divider(color: MyWardrobeColors.border),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -258,9 +249,7 @@ Future<void> _createAccount() async {
                       ),
                     ),
                     const Expanded(
-                      child: Divider(
-                        color: MyWardrobeColors.border,
-                      ),
+                      child: Divider(color: MyWardrobeColors.border),
                     ),
                   ],
                 ),
@@ -289,9 +278,7 @@ Future<void> _createAccount() async {
                     children: [
                       const Text(
                         'Already have an account? ',
-                        style: TextStyle(
-                          color: MyWardrobeColors.secondaryText,
-                        ),
+                        style: TextStyle(color: MyWardrobeColors.secondaryText),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -350,10 +337,7 @@ class _SocialButton extends StatelessWidget {
       height: 54,
       child: OutlinedButton.icon(
         onPressed: onPressed,
-        icon: Icon(
-          icon,
-          color: MyWardrobeColors.text,
-        ),
+        icon: Icon(icon, color: MyWardrobeColors.text),
         label: Text(
           label,
           style: const TextStyle(
@@ -362,9 +346,7 @@ class _SocialButton extends StatelessWidget {
           ),
         ),
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(
-            color: MyWardrobeColors.border,
-          ),
+          side: const BorderSide(color: MyWardrobeColors.border),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),

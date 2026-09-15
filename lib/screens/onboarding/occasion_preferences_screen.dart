@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../app/routes.dart';
 import '../../app/theme.dart';
 
 class OccasionPreferencesScreen extends StatefulWidget {
@@ -10,8 +10,7 @@ class OccasionPreferencesScreen extends StatefulWidget {
       _OccasionPreferencesScreenState();
 }
 
-class _OccasionPreferencesScreenState
-    extends State<OccasionPreferencesScreen> {
+class _OccasionPreferencesScreenState extends State<OccasionPreferencesScreen> {
   final List<String> _occasions = [
     'Work',
     'Everyday',
@@ -37,9 +36,7 @@ class _OccasionPreferencesScreenState
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                    ),
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                   ),
@@ -80,8 +77,7 @@ class _OccasionPreferencesScreenState
                       const SizedBox(height: 12),
                   itemBuilder: (context, index) {
                     final occasion = _occasions[index];
-                    final selected =
-                        _selectedOccasions.contains(occasion);
+                    final selected = _selectedOccasions.contains(occasion);
 
                     return GestureDetector(
                       onTap: () {
@@ -96,9 +92,7 @@ class _OccasionPreferencesScreenState
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 180),
                         height: 64,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         decoration: BoxDecoration(
                           color: selected
                               ? MyWardrobeColors.lavender
@@ -147,15 +141,13 @@ class _OccasionPreferencesScreenState
                   onPressed: _selectedOccasions.isEmpty
                       ? null
                       : () {
-                          // We will connect Screen 3 next.
+                          Navigator.pushNamed(context, AppRoutes.wardrobeGoal);
                         },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyWardrobeColors.text,
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        MyWardrobeColors.border,
-                    disabledForegroundColor:
-                        MyWardrobeColors.secondaryText,
+                    disabledBackgroundColor: MyWardrobeColors.border,
+                    disabledForegroundColor: MyWardrobeColors.secondaryText,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
@@ -163,10 +155,7 @@ class _OccasionPreferencesScreenState
                   ),
                   child: const Text(
                     'Continue',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
