@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-
+import '../../app/routes.dart';
 import '../../app/theme.dart';
 
 class StylePreferencesScreen extends StatefulWidget {
   const StylePreferencesScreen({super.key});
 
   @override
-  State<StylePreferencesScreen> createState() =>
-      _StylePreferencesScreenState();
+  State<StylePreferencesScreen> createState() => _StylePreferencesScreenState();
 }
 
-class _StylePreferencesScreenState
-    extends State<StylePreferencesScreen> {
+class _StylePreferencesScreenState extends State<StylePreferencesScreen> {
   final List<String> _styles = [
     'Minimal',
     'Classic',
@@ -38,9 +36,7 @@ class _StylePreferencesScreenState
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                    ),
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                   ),
@@ -83,8 +79,7 @@ class _StylePreferencesScreenState
               Expanded(
                 child: GridView.builder(
                   itemCount: _styles.length,
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
@@ -92,8 +87,7 @@ class _StylePreferencesScreenState
                   ),
                   itemBuilder: (context, index) {
                     final style = _styles[index];
-                    final selected =
-                        _selectedStyles.contains(style);
+                    final selected = _selectedStyles.contains(style);
 
                     return GestureDetector(
                       onTap: () {
@@ -160,15 +154,16 @@ class _StylePreferencesScreenState
                   onPressed: _selectedStyles.isEmpty
                       ? null
                       : () {
-                          // Next onboarding screen will go here.
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.occasionPreferences,
+                          );
                         },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyWardrobeColors.text,
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        MyWardrobeColors.border,
-                    disabledForegroundColor:
-                        MyWardrobeColors.secondaryText,
+                    disabledBackgroundColor: MyWardrobeColors.border,
+                    disabledForegroundColor: MyWardrobeColors.secondaryText,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
@@ -176,10 +171,7 @@ class _StylePreferencesScreenState
                   ),
                   child: const Text(
                     'Continue',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),

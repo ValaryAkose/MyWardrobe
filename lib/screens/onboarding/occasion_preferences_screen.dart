@@ -2,28 +2,27 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 
-class StylePreferencesScreen extends StatefulWidget {
-  const StylePreferencesScreen({super.key});
+class OccasionPreferencesScreen extends StatefulWidget {
+  const OccasionPreferencesScreen({super.key});
 
   @override
-  State<StylePreferencesScreen> createState() =>
-      _StylePreferencesScreenState();
+  State<OccasionPreferencesScreen> createState() =>
+      _OccasionPreferencesScreenState();
 }
 
-class _StylePreferencesScreenState
-    extends State<StylePreferencesScreen> {
-  final List<String> _styles = [
-    'Minimal',
-    'Classic',
-    'Street',
-    'Romantic',
-    'Elegant',
-    'Sporty',
-    'Bohemian',
-    'Trendy',
+class _OccasionPreferencesScreenState
+    extends State<OccasionPreferencesScreen> {
+  final List<String> _occasions = [
+    'Work',
+    'Everyday',
+    'Going out',
+    'Travel',
+    'Events',
+    'University',
+    'Exercise',
   ];
 
-  final Set<String> _selectedStyles = {};
+  final Set<String> _selectedOccasions = {};
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class _StylePreferencesScreenState
                   ),
                   const Spacer(),
                   const Text(
-                    '1 of 4',
+                    '2 of 4',
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -55,11 +54,9 @@ class _StylePreferencesScreenState
                   ),
                 ],
               ),
-
               const SizedBox(height: 32),
-
               const Text(
-                'What is your\nstyle?',
+                'What do you\ndress for?',
                 style: TextStyle(
                   fontFamily: 'DM Serif Display',
                   fontSize: 42,
@@ -67,51 +64,46 @@ class _StylePreferencesScreenState
                   color: MyWardrobeColors.text,
                 ),
               ),
-
               const SizedBox(height: 12),
-
               const Text(
-                'Choose the styles that feel most like you.',
+                'Select everything that applies to you.',
                 style: TextStyle(
                   fontSize: 15,
                   color: MyWardrobeColors.secondaryText,
                 ),
               ),
-
               const SizedBox(height: 32),
-
               Expanded(
-                child: GridView.builder(
-                  itemCount: _styles.length,
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 1.45,
-                  ),
+                child: ListView.separated(
+                  itemCount: _occasions.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 12),
                   itemBuilder: (context, index) {
-                    final style = _styles[index];
+                    final occasion = _occasions[index];
                     final selected =
-                        _selectedStyles.contains(style);
+                        _selectedOccasions.contains(occasion);
 
                     return GestureDetector(
                       onTap: () {
                         setState(() {
                           if (selected) {
-                            _selectedStyles.remove(style);
+                            _selectedOccasions.remove(occasion);
                           } else {
-                            _selectedStyles.add(style);
+                            _selectedOccasions.add(occasion);
                           }
                         });
                       },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 180),
+                        height: 64,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
                         decoration: BoxDecoration(
                           color: selected
                               ? MyWardrobeColors.lavender
                               : MyWardrobeColors.white,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(18),
                           border: Border.all(
                             color: selected
                                 ? MyWardrobeColors.violet
@@ -119,30 +111,27 @@ class _StylePreferencesScreenState
                             width: selected ? 1.5 : 1,
                           ),
                         ),
-                        child: Stack(
+                        child: Row(
                           children: [
-                            Center(
-                              child: Text(
-                                style,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: selected
-                                      ? FontWeight.w600
-                                      : FontWeight.w500,
-                                  color: MyWardrobeColors.text,
-                                ),
+                            Text(
+                              occasion,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: selected
+                                    ? FontWeight.w600
+                                    : FontWeight.w500,
+                                color: MyWardrobeColors.text,
                               ),
                             ),
-                            if (selected)
-                              const Positioned(
-                                top: 10,
-                                right: 10,
-                                child: Icon(
-                                  Icons.check_circle_rounded,
-                                  size: 20,
-                                  color: MyWardrobeColors.violet,
-                                ),
-                              ),
+                            const Spacer(),
+                            Icon(
+                              selected
+                                  ? Icons.check_circle_rounded
+                                  : Icons.circle_outlined,
+                              color: selected
+                                  ? MyWardrobeColors.violet
+                                  : MyWardrobeColors.secondaryText,
+                            ),
                           ],
                         ),
                       ),
@@ -150,17 +139,15 @@ class _StylePreferencesScreenState
                   },
                 ),
               ),
-
               const SizedBox(height: 18),
-
               SizedBox(
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: _selectedStyles.isEmpty
+                  onPressed: _selectedOccasions.isEmpty
                       ? null
                       : () {
-                          // Next onboarding screen will go here.
+                          // We will connect Screen 3 next.
                         },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyWardrobeColors.text,
