@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/auth_provider.dart';
 import '../../app/routes.dart';
 import '../../app/theme.dart';
 
@@ -26,17 +28,35 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _login() {
-    if (!_formKey.currentState!.validate()) {
-      return;
-    }
+ Future<void> _login() async {
+  if (!_formKey.currentState!.validate()) {
+    return;
+  }
 
+  final authProvider = context.read<AuthProvider>();
+
+  final success = await authProvider.login(
+    email: _emailController.text,
+    password: _passwordController.text,
+  );
+
+  if (!mounted) return;
+
+  if (success) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Login form is valid!'),
+        content: Text('Welcome back!'),
+      ),
+    );
+
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Incorrect email or password.'),
       ),
     );
   }
+}
 
   @override
   Widget build(BuildContext context) {
