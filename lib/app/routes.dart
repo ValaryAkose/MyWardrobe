@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../screens/home/home_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/auth/welcome_screen.dart';
 import '../screens/auth/signup_screen.dart';
@@ -12,6 +12,7 @@ import '../screens/onboarding/add_wardrobe_screen.dart';
 
 class AppRoutes {
   static const splash = '/';
+  static const home = '/home';
   static const welcome = '/welcome';
   static const signup = '/signup';
   static const login = '/login';
@@ -23,11 +24,13 @@ class AppRoutes {
   static const addWardrobe = '/onboarding/wardrobe';
 
   static Map<String, WidgetBuilder> get routes => {
+        
         splash: (_) => const SplashScreen(),
         welcome: (_) => const WelcomeScreen(),
         signup: (_) => const SignupScreen(),
         login: (_) => const LoginScreen(),
         forgotPassword: (_) => const ForgotPasswordScreen(),
+        home: (_) => const HomeScreen(),
 
         stylePreferences: (_) =>
             const StylePreferencesScreen(),

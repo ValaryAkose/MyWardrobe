@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../app/routes.dart';
 import '../../app/theme.dart';
 
 class AddWardrobeScreen extends StatelessWidget {
@@ -18,9 +18,7 @@ class AddWardrobeScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                    ),
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                   ),
@@ -39,7 +37,7 @@ class AddWardrobeScreen extends StatelessWidget {
               const SizedBox(height: 34),
 
               const Text(
-                'Let’s build\nyour wardrobe',
+                'Let\'s build\nyour wardrobe',
                 style: TextStyle(
                   fontFamily: 'DM Serif Display',
                   fontSize: 42,
@@ -72,9 +70,7 @@ class AddWardrobeScreen extends StatelessWidget {
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text(
-                              'Camera will be connected next.',
-                            ),
+                            content: Text('Camera will be connected next.'),
                           ),
                         );
                       },
@@ -126,12 +122,10 @@ class AddWardrobeScreen extends StatelessWidget {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'You can add clothes later from your wardrobe.',
-                        ),
-                      ),
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.home,
+                      (route) => false,
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -144,10 +138,7 @@ class AddWardrobeScreen extends StatelessWidget {
                   ),
                   child: const Text(
                     'Start with my wardrobe',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -161,9 +152,7 @@ class AddWardrobeScreen extends StatelessWidget {
                   },
                   child: const Text(
                     'I’ll do this later',
-                    style: TextStyle(
-                      color: MyWardrobeColors.secondaryText,
-                    ),
+                    style: TextStyle(color: MyWardrobeColors.secondaryText),
                   ),
                 ),
               ),
@@ -200,9 +189,7 @@ class _AddOption extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: MyWardrobeColors.border,
-          ),
+          border: Border.all(color: MyWardrobeColors.border),
         ),
         child: Row(
           children: [
@@ -213,10 +200,7 @@ class _AddOption extends StatelessWidget {
                 color: MyWardrobeColors.white.withValues(alpha: 0.7),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Icon(
-                icon,
-                color: MyWardrobeColors.text,
-              ),
+              child: Icon(icon, color: MyWardrobeColors.text),
             ),
 
             const SizedBox(width: 16),
